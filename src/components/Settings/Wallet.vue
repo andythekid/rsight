@@ -7,12 +7,12 @@
             <div class="row">
               <label class="col-md-3 control-label col-form-label-sm" for="coin-name">
                 <b>
-                  Test
+                  {{ wallet.coin }}
                 </b>
               </label>
               <label class="col-md-2 offset-md-2 control-label col-form-label-sm" for="coin-alias">Alias</label>
               <div class="col-md-5">
-                <input type="text" class="form-control form-control-sm" id="coin-alias" placeholder="Alias" value="Sluts" disabled>
+                <input type="text" class="form-control form-control-sm" id="coin-alias" placeholder="Alias" :value="wallet.alias" disabled>
               </div>
             </div>
           </div>
@@ -20,7 +20,7 @@
             <div class="row">
               <label class="col-md-2 control-label col-form-label-sm" for="coin-address">Address</label>
               <div class="col-md-10">
-                <input type="text" class="form-control form-control-sm" id="coin-address" placeholder="Address" value="123"
+                <input type="text" class="form-control form-control-sm" id="coin-address" placeholder="Address" :value="wallet.address"
                   disabled>
               </div>
             </div>
@@ -34,7 +34,7 @@
               </div>
               <label class="col-md-2 offset-md-1 control-label col-form-label-sm" for="coin-balance">Balance</label>
               <div class="col-md-5">
-                <input type="number" class="form-control form-control-sm" id="coin-balance" placeholder="Ballance" value="<%= wallet.ballance / wallet.divider %>"
+                <input type="number" class="form-control form-control-sm" id="coin-balance" placeholder="Ballance" :value="wallet.ballance"
                   disabled>
               </div>
             </div>
@@ -74,7 +74,7 @@
 
 <script>
   export default {
-
+    props: ['wallet']
   }
 
 </script>
