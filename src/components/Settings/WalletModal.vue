@@ -1,5 +1,6 @@
 <template>
-  <div class="col-md-12">
+  <modal name="wallet-modal"
+    :adaptive="true">
     <form class="form-horizontal" action="">
       <div class="row">
         <div class="col-md-10">
@@ -7,12 +8,12 @@
             <div class="row">
               <label class="col-md-3 control-label col-form-label-sm" for="coin-name">
                 <b>
-                  {{ wallet.coin }}
+                  1
                 </b>
               </label>
               <label class="col-md-2 offset-md-2 control-label col-form-label-sm" for="coin-alias">Alias</label>
               <div class="col-md-5">
-                <input type="text" class="form-control form-control-sm" id="coin-alias" placeholder="Alias" :value="wallet.alias" disabled>
+                <input type="text" class="form-control form-control-sm" id="coin-alias" placeholder="Alias" disabled>
               </div>
             </div>
           </div>
@@ -20,7 +21,7 @@
             <div class="row">
               <label class="col-md-2 control-label col-form-label-sm" for="coin-address">Address</label>
               <div class="col-md-10">
-                <input type="text" class="form-control form-control-sm" id="coin-address" placeholder="Address" :value="wallet.address"
+                <input type="text" class="form-control form-control-sm" id="coin-address" placeholder="Address"
                   disabled>
               </div>
             </div>
@@ -34,7 +35,7 @@
               </div>
               <label class="col-md-2 offset-md-1 control-label col-form-label-sm" for="coin-balance">Balance</label>
               <div class="col-md-5">
-                <input type="number" class="form-control form-control-sm" id="coin-balance" placeholder="Ballance" :value="wallet.ballance"
+                <input type="number" class="form-control form-control-sm" id="coin-balance" placeholder="Ballance"
                   disabled>
               </div>
             </div>
@@ -69,12 +70,21 @@
         </div>
       </div>
     </form>
-  </div>
+  </modal>
 </template>
 
 <script>
-  export default {
-    props: ['wallet']
+export default {
+  methods: {
   }
-
+}
 </script>
+
+<style scoped>
+.form-horizontal {
+  margin: 30px;
+}
+</style>
+
+
+
