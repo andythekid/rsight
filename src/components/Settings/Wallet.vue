@@ -29,8 +29,8 @@
                 Active
             </label>
           </div>
-          <button class="btn btn-warning btn-block btn-sm">Edit</button>
-          <button class="btn btn-danger btn-block btn-sm">Delete</button>
+          <button type="button" class="btn btn-warning btn-block btn-sm" @click="loadEditForm">Edit</button>
+          <button type="button" class="btn btn-danger btn-block btn-sm">Delete</button>
         </div>
       </div>
     </form>
@@ -39,7 +39,12 @@
 
 <script>
   export default {
-    props: ['wallet']
+    props: ['wallet'],
+    methods: {
+      loadEditForm () {
+        this.$modal.show('wallet-modal', { wallet: this.wallet })
+      }
+    }
   }
 
 </script>

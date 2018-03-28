@@ -32,7 +32,7 @@
         <app-wallet v-for="wallet in wallets" :key="wallet.address" :wallet="wallet"></app-wallet>
       </div>
     </div>
-    <wallet-modal/>
+    <wallet-modal />
   </div>
 </template>
 
@@ -49,7 +49,8 @@
           { coin: 'Ethereum', alias: 'Инвестиции', address: '0x32Be343B94f860124dC4fEe278FDCBD38C102D88', ballance: 56.37, walletType: 'Address', group: 'None', groupName: '', isActive: true },
         ],
         wallGroups: [],
-        rigs: []
+        rigs: [],
+        wallet: []
       }
     },
     components: {
@@ -58,10 +59,9 @@
     },
     methods: {
       modalShow () {
-        this.$modal.show('wallet-modal');
+        this.$modal.show('wallet-modal', { wallet: 'New' });
       },
       getLength (obj) {
-
         return this[obj].length;
       }
     }

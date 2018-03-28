@@ -1,12 +1,13 @@
 <template>
   <modal name="wallet-modal"
+    @before-open="beforeOpen"
     :adaptive="true">
     <form class="form-horizontal" action="">
       <div class="row">
         <div class="col-md-10">
           <div class="form-group">
             <div class="row">
-              <select class="form-control form-control-sm custom-select col-md-5" v-model="coin">
+              <select class="form-control form-control-sm custom-select col-md-5" v-model="wallet.coin">
                 <option value="Bitcoin">Bitcoin</option>
                 <option value="Ethereum">Ethereum</option>
                 <option value="EOS">EOS</option>
@@ -16,7 +17,7 @@
                 class="form-control form-control-sm col-md-6 offset-md-1" 
                 id="coin-alias" 
                 placeholder="Alias"
-                v-model="alias">
+                v-model="wallet.alias">
             </div>
           </div>
           <div class="form-group">
@@ -28,7 +29,7 @@
                     type="radio" 
                     id="address" 
                     value="Address" 
-                    v-model="walletType"
+                    v-model="wallet.walletType"
                     checked>
                   Blockchain address
                 </label>
@@ -40,7 +41,7 @@
                     type="radio" 
                     id="ballance" 
                     value="Ballance"
-                    v-model="walletType">
+                    v-model="wallet.walletType">
                   Local wallet
                 </label>
               </div>
@@ -48,25 +49,25 @@
           </div>
           <div 
             class="form-group"
-            v-show="walletType === 'Address'">
+            v-show="wallet.walletType === 'Address'">
             <div class="row">
               <input 
                 type="text" 
                 class="form-control form-control-sm col-md-12" 
                 id="coin-address"
-                v-model="address" 
+                v-model="wallet.address" 
                 placeholder="Address">
             </div>
           </div>
           <div 
             class="form-group"
-            v-show="walletType === 'Ballance'">
+            v-show="wallet.walletType === 'Ballance'">
             <div class="row">
                 <input 
                   type="number" 
                   class="form-control form-control-sm col-md-12" 
                   id="coin-balance" 
-                  v-model="ballance"
+                  v-model="wallet.ballance"
                   placeholder="Ballance">
             </div>
           </div>
@@ -78,7 +79,7 @@
                     class="form-check-input form-control-sm" 
                     type="radio" 
                     value="None"
-                    v-model="group"> 
+                    v-model="wallet.group"> 
                     No group
                 </label>
               </div>
@@ -88,7 +89,7 @@
                     class="form-check-input form-control-sm" 
                     type="radio" 
                     value="Same"
-                    v-model="group"> 
+                    v-model="wallet.group"> 
                     Group with same coin
                 </label>
               </div>
@@ -100,7 +101,7 @@
                     class="form-check-input form-control-sm" 
                     type="radio" 
                     value="Another"
-                    v-model="group"> 
+                    v-model="wallet.group"> 
                     Add to another group
                 </label>
               </div>
@@ -109,7 +110,7 @@
                   class="form-control form-control-sm" 
                   type="text" 
                   name="group-name"
-                  v-model="groupName">
+                  v-model="wallet.groupName">
               </div>
             </div>
           </div>
@@ -121,7 +122,7 @@
                 class="form-check-input form-control-sm" 
                 type="checkbox" 
                 name="power" 
-                v-model="isActive"> 
+                v-model="wallet.isActive"> 
                 Active
             </label>
           </div>
@@ -136,17 +137,26 @@
 export default {
   data () {
     return {
-      coin: '',
-      alias: '',
-      walletType: 'Address',
-      address: '',
-      ballance: '',
-      group: 'Same',
-      groupName: '',
-      isActive: true
+      wallet: ''
     }
   },
   methods: {
+    beforeOpen (event) {
+      if(event.params.wallet === 'New') {
+        this.wallet = {
+          coin: '',
+          alias: '',
+          walletType: 'Address',
+          address: '',
+          ballance: '',
+          group: 'Same',
+          groupName: '',
+          isActive: true,
+        }
+      } else {
+        this.wallet = event.params.wallet
+      }
+    }
   }
 }
 </script>

@@ -4,7 +4,7 @@ import VModal from 'vue-js-modal'
 import App from './App.vue'
 import { routes } from './routes'
 
-Vue.use(VModal)
+Vue.use(VModal, { dynamic: true })
 Vue.use(VueRouter)
 const router = new VueRouter({
     mode: 'history',
