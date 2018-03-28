@@ -5,13 +5,16 @@
         <input class="form-control" placeholder="Search..">
         <div class="list-group">
           <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">Coins
-            <span class="badge badge-primary">2</span>
+            <span class="badge badge-primary">{{ getLength("coins") }}</span>
           </a>
           <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">Wallets
-            <span class="badge badge-primary">4</span>
+            <span class="badge badge-primary">{{ getLength("wallets") }}</span>
+          </a>
+          <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">Wallet groups
+            <span class="badge badge-primary">{{ getLength("wallGroups") }}</span>
           </a>
           <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">Rigs
-            <span class="badge badge-primary">3</span>
+            <span class="badge badge-primary">{{ getLength("rigs") }}</span>
           </a>
         </div>
       </div>
@@ -39,11 +42,14 @@
   export default {
     data() {
       return {
+        coins: [],
         wallets: [
-          { coin: 'Bitcoin', alias: 'Ламба', address: '1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX', ballance: 1.02 },
-          { coin: 'Bitcoin', alias: 'Шлюхи', address: '1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xwX', ballance: 0.37 },
-          { coin: 'Ethereum', alias: 'Инвестиции', address: '0x32Be343B94f860124dC4fEe278FDCBD38C102D88', ballance: 56.37 },
-        ]
+          { coin: 'Bitcoin', alias: 'Ламба', address: '1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX', ballance: 1.02,  walletType: 'Address', group: 'Another', groupName: '123', isActive: true},
+          { coin: 'Bitcoin', alias: 'Шлюхи', address: '1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xwX', ballance: 0.37, walletType: 'Ballance', group: 'Same', groupName: '', isActive: false },
+          { coin: 'Ethereum', alias: 'Инвестиции', address: '0x32Be343B94f860124dC4fEe278FDCBD38C102D88', ballance: 56.37, walletType: 'Address', group: 'None', groupName: '', isActive: true },
+        ],
+        wallGroups: [],
+        rigs: []
       }
     },
     components: {
@@ -53,6 +59,10 @@
     methods: {
       modalShow () {
         this.$modal.show('wallet-modal');
+      },
+      getLength (obj) {
+
+        return this[obj].length;
       }
     }
   }

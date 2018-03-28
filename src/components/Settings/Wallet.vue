@@ -5,63 +5,28 @@
         <div class="col-md-10">
           <div class="form-group">
             <div class="row">
-              <label class="col-md-3 control-label col-form-label-sm" for="coin-name">
-                <b>
-                  {{ wallet.coin }}
-                </b>
-              </label>
-              <label class="col-md-2 offset-md-2 control-label col-form-label-sm" for="coin-alias">Alias</label>
-              <div class="col-md-5">
-                <input type="text" class="form-control form-control-sm" id="coin-alias" placeholder="Alias" :value="wallet.alias" disabled>
-              </div>
+              <label>{{ wallet.coin }} :: {{ wallet.alias }}</label>
             </div>
-          </div>
-          <div class="form-group">
             <div class="row">
-              <label class="col-md-2 control-label col-form-label-sm" for="coin-address">Address</label>
-              <div class="col-md-10">
-                <input type="text" class="form-control form-control-sm" id="coin-address" placeholder="Address" :value="wallet.address"
-                  disabled>
-              </div>
+              <label v-if="wallet.walletType === 'Address'">Address: {{ wallet.address }}</label>
+              <label v-else>Ballance: {{ wallet.ballance }}</label>
             </div>
-          </div>
-          <div class="form-group">
             <div class="row">
-              <div class="form-check col-md-4">
-                <label class="form-check-label col-form-label-sm">
-                  <input class="form-check-input form-control-sm" type="checkbox" name="localWallet"> Local wallet
-                </label>
-              </div>
-              <label class="col-md-2 offset-md-1 control-label col-form-label-sm" for="coin-balance">Balance</label>
-              <div class="col-md-5">
-                <input type="number" class="form-control form-control-sm" id="coin-balance" placeholder="Ballance" :value="wallet.ballance"
-                  disabled>
-              </div>
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="row">
-              <div class="form-check col-md-7">
-                <label class="form-check-label col-form-label-sm">
-                  <input class="form-check-input form-control-sm" type="radio" name="group" value="nope" checked> No group
-                </label>
-                <label class="form-check-label col-form-label-sm">
-                  <input class="form-check-input form-control-sm" type="radio" name="group" value="same"> Group with same coin
-                </label>
-                <label class="form-check-label col-form-label-sm">
-                  <input class="form-check-input form-control-sm" type="radio" name="group" value="another"> Add to another group
-                </label>
-              </div>
-              <div class="col-md-5">
-                <input class="form-control form-control-sm" type="text" name="group-name" disabled>
-              </div>
+              <label v-if="wallet.group === 'None'">Grouping: none</label>
+              <label v-else-if="wallet.group === 'Same'">Grouping: same coins</label>
+              <label v-else>Group name: {{ wallet.groupName }}</label>
             </div>
           </div>
         </div>
         <div class="col-md-2">
           <div class="form-check">
             <label class="form-check-label col-form-label-sm">
-              <input class="form-check-input form-control-sm" type="checkbox" name="power" checked> Active
+              <input 
+                class="form-check-input form-control-sm" 
+                type="checkbox" 
+                name="power" 
+                v-model="wallet.isActive"> 
+                Active
             </label>
           </div>
           <button class="btn btn-warning btn-block btn-sm">Edit</button>
