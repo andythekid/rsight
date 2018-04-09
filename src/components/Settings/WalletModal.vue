@@ -126,7 +126,16 @@
                 Active
             </label>
           </div>
-          <button class="btn btn-warning btn-block btn-sm">Save</button>
+          <button 
+            type="button"
+            class="btn btn-warning btn-block btn-sm" 
+            @click="save"
+            >Save</button>
+          <button 
+            type="button"
+            class="btn btn-warning btn-block btn-sm" 
+            @click="cancel"
+            >Canсel</button>
         </div>
       </div>
     </form>
@@ -137,12 +146,13 @@
 export default {
   data () {
     return {
-      wallet: ''
+      wallet: '',
+      ss: ''
     }
   },
   methods: {
     beforeOpen (event) {
-      if(event.params.wallet === 'New') {
+      if (event.params.wallet === 'New') {
         this.wallet = {
           coin: '',
           alias: '',
@@ -154,8 +164,18 @@ export default {
           isActive: true,
         }
       } else {
-        this.wallet = event.params.wallet
+        this.wallet = Object.assign({}, event.params.wallet)
       }
+      this.ss = event.params.wallet
+    },
+    save () {
+      if (this.ss !== 'New') {
+        for (var i in this.wallet) this.ss[i] = this.wallet[i]
+      }
+      this.$modal.hide('wallet-modal')
+    },
+    cancel () {
+      this.$modal.hide('wallet-modal')
     }
   }
 }
