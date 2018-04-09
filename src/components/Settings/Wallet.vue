@@ -25,6 +25,7 @@
                 class="form-check-input form-control-sm" 
                 type="checkbox" 
                 name="power" 
+                onclick="return false;"
                 v-model="wallet.isActive"> 
                 Active
             </label>

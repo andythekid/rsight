@@ -29,7 +29,7 @@
           </div>
           <button type="button" class="btn btn-primary mb-2" @click="modalShow">Add new</button>
         </form>
-        <app-wallet v-for="wallet in wallets" :key="wallet.address" :wallet="wallet"></app-wallet>
+        <app-wallet v-for="wallet in wallets" :key="wallet.id" :wallet="wallet"></app-wallet>
       </div>
     </div>
     <wallet-modal />
@@ -43,11 +43,6 @@
     data() {
       return {
         coins: [],
-        wallets: [
-          { coin: 'Bitcoin', alias: 'Ламба', address: '1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX', ballance: 1.02,  walletType: 'Address', group: 'Another', groupName: '123', isActive: true},
-          { coin: 'Bitcoin', alias: 'Шлюхи', address: '1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xwX', ballance: 0.37, walletType: 'Ballance', group: 'Same', groupName: '', isActive: false },
-          { coin: 'Ethereum', alias: 'Инвестиции', address: '0x32Be343B94f860124dC4fEe278FDCBD38C102D88', ballance: 56.37, walletType: 'Address', group: 'None', groupName: '', isActive: true },
-        ],
         wallGroups: [],
         rigs: [],
         wallet: []
@@ -57,12 +52,17 @@
       appWallet: Wallet,
       walletModal: WalletModal
     },
+    computed: {
+      wallets() {
+        return this.$store.state.wallets
+      }
+    },
     methods: {
       modalShow () {
-        this.$modal.show('wallet-modal', { wallet: 'New' });
+        this.$modal.show('wallet-modal', { wallet: 'New' })
       },
       getLength (obj) {
-        return this[obj].length;
+        return this[obj].length
       }
     }
   }

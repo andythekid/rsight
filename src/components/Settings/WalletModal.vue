@@ -147,13 +147,13 @@ export default {
   data () {
     return {
       wallet: '',
-      ss: ''
     }
   },
   methods: {
     beforeOpen (event) {
       if (event.params.wallet === 'New') {
         this.wallet = {
+          id: '',
           coin: '',
           alias: '',
           walletType: 'Address',
@@ -166,12 +166,9 @@ export default {
       } else {
         this.wallet = Object.assign({}, event.params.wallet)
       }
-      this.ss = event.params.wallet
     },
     save () {
-      if (this.ss !== 'New') {
-        for (var i in this.wallet) this.ss[i] = this.wallet[i]
-      }
+      this.$store.commit('setWallet', this.wallet)
       this.$modal.hide('wallet-modal')
     },
     cancel () {
