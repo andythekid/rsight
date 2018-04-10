@@ -46,7 +46,7 @@
         this.$modal.show('wallet-modal', { wallet: this.wallet })
       },
       deleteWallet () {
-        let result = confirm("Want to delete?");
+        let result = confirm('Want to delete?')
         if (result) {
           this.$store.commit('deleteWallet', this.wallet)
         }

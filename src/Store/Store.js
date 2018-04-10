@@ -19,7 +19,8 @@ export const store = new Vuex.Store({
             { id: 'd9efc904-0fcd-4e11-8cb6-adcf0f547001', coin: 'Ethereum', alias: 'Инвестиции', address: '0x32Be343B94f860124dC4fEe278FDCBD38C102D88', ballance: 56.37, walletType: 'Address', group: 'None', groupName: '', isActive: true },
         ],
         coins: [
-            { id: '402d5087-5248-4398-a934-5e8970d4ef64', coin: 'Bitcoin', token: 'BTC', api: '' }
+            { id: '402d5087-5248-4398-a934-5e8970d4ef64', coin: 'Bitcoin', token: 'BTC', api: '' },
+            { id: '491ff6aa-ab61-45a3-9683-a4da71ab374c', coin: 'Ethereum', token: 'ETH', api: '' }
         ],
         wallGroups: [],
         exchanges: [],
@@ -40,6 +41,21 @@ export const store = new Vuex.Store({
         deleteWallet(state, wallet) {
             var index = state.wallets.findIndex(x => x.id == wallet.id)
             state.wallets.splice(index, 1);
+        },
+        setCoin(state, coin) {
+            if (coin.id !== '') {
+                // Exist coin
+                var index = state.coins.findIndex(x => x.id == coin.id)
+            } else {
+                // New coin
+                coin.id = uuidv4() // TODO: check id in DB
+                index = state.coins.length
+            }
+            Vue.set(state.coins, index, coin)
+        },
+        deleteCoin(state, coin) {
+            var index = state.coins.findIndex(x => x.id == coin.id)
+            state.coins.splice(index, 1);
         }
     }
 });
