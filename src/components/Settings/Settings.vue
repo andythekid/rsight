@@ -10,6 +10,9 @@
           <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">Wallets
             <span class="badge badge-primary">{{ getLength("wallets") }}</span>
           </a>
+          <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">Exchanges
+            <span class="badge badge-primary">{{ getLength("exchanges") }}</span>
+          </a>
           <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">Wallet groups
             <span class="badge badge-primary">{{ getLength("wallGroups") }}</span>
           </a>
@@ -42,10 +45,6 @@
   export default {
     data() {
       return {
-        coins: [],
-        wallGroups: [],
-        rigs: [],
-        wallet: []
       }
     },
     components: {
@@ -55,6 +54,18 @@
     computed: {
       wallets() {
         return this.$store.state.wallets
+      },
+      coins() {
+        return this.$store.state.coins
+      },
+      wallGroups() {
+        return this.$store.state.wallGroups
+      },
+      rigs() {
+        return this.$store.state.rigs
+      },
+      exchanges() {
+        return this.$store.state.exchanges
       }
     },
     methods: {

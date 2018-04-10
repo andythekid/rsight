@@ -6,9 +6,9 @@ Vue.use(Vuex)
 function uuidv4() {
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
         var r = Math.random() * 16 | 0,
-            v = c == 'x' ? r : (r & 0x3 | 0x8);
-        return v.toString(16);
-    });
+            v = c == 'x' ? r : (r & 0x3 | 0x8)
+        return v.toString(16)
+    })
 }
 
 export const store = new Vuex.Store({
@@ -18,6 +18,12 @@ export const store = new Vuex.Store({
             { id: '6cf4d6a6-fdc9-4b0c-82ac-a875ad9db5da', coin: 'Bitcoin', alias: 'Шлюхи', address: '1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xwX', ballance: 0.37, walletType: 'Ballance', group: 'Same', groupName: '', isActive: false },
             { id: 'd9efc904-0fcd-4e11-8cb6-adcf0f547001', coin: 'Ethereum', alias: 'Инвестиции', address: '0x32Be343B94f860124dC4fEe278FDCBD38C102D88', ballance: 56.37, walletType: 'Address', group: 'None', groupName: '', isActive: true },
         ],
+        coins: [
+            { id: '402d5087-5248-4398-a934-5e8970d4ef64', coin: 'Bitcoin', token: 'BTC', api: '' }
+        ],
+        wallGroups: [],
+        exchanges: [],
+        rigs: []
     },
     mutations: {
         setWallet(state, wallet) {
