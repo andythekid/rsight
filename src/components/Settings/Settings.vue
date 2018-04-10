@@ -10,6 +10,7 @@
         <input class="form-control" placeholder="Search..">
         <button type="button" class="btn btn-primary mb-2" @click="modalShow">Add new</button>
         <app-wallet v-for="wallet in wallets" :key="wallet.id" :wallet="wallet"></app-wallet>
+        <wallet-modal />
       </v-tab>
       <v-tab title="Coins">
         Coins
@@ -25,7 +26,6 @@
         Rigs
       </v-tab>
     </vue-tabs>
-    <wallet-modal />
   </div>
 </template>
 

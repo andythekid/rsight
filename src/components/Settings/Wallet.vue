@@ -31,7 +31,7 @@
             </label>
           </div>
           <button type="button" class="btn btn-warning btn-block btn-sm" @click="loadEditForm">Edit</button>
-          <button type="button" class="btn btn-danger btn-block btn-sm">Delete</button>
+          <button type="button" class="btn btn-danger btn-block btn-sm" @click="deleteWallet">Delete</button>
         </div>
       </div>
     </form>
@@ -44,6 +44,12 @@
     methods: {
       loadEditForm () {
         this.$modal.show('wallet-modal', { wallet: this.wallet })
+      },
+      deleteWallet () {
+        let result = confirm("Want to delete?");
+        if (result) {
+          this.$store.commit('deleteWallet', this.wallet)
+        }
       }
     }
   }

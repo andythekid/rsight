@@ -36,6 +36,10 @@ export const store = new Vuex.Store({
                 index = state.wallets.length
             }
             Vue.set(state.wallets, index, wallet)
+        },
+        deleteWallet(state, wallet) {
+            var index = state.wallets.findIndex(x => x.id == wallet.id)
+            state.wallets.splice(index, 1);
         }
     }
 });
