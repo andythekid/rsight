@@ -20,6 +20,20 @@
         <app-wallet v-for="wallet in wallets" :key="wallet.id" :wallet="wallet"></app-wallet>
         <wallet-modal />
       </v-tab>
+      <v-tab title="Wallet groups">
+        <div class="container bottom-search">
+          <div class="row">
+            <input class="form-control col-md-4 form-control-sm" placeholder="Search..">
+            <button 
+            type="button" 
+            class="btn btn-primary btn-sm mb-2 col-md-2 offset-md-6" 
+            @click="modalWallGroupShow"
+            >Add new</button>
+          </div>
+        </div>
+        <app-wall-group v-for="wallGroup in wallGroups" :key="wallGroup.id" :wallGroup="wallGroup"></app-wall-group>
+        <wall-group-modal />
+      </v-tab>
       <v-tab title="Coins">
         <div class="container bottom-search">
           <div class="row">
@@ -34,12 +48,8 @@
         <app-coin v-for="coin in coins" :key="coin.id" :coin="coin"></app-coin>
         <coin-modal />
       </v-tab>
-  
       <v-tab title="Exchanges">
         Exchanges
-      </v-tab>
-      <v-tab title="Wallet groups">
-        Wallet groups
       </v-tab>
       <v-tab title="Rigs">
         <div class="container bottom-search">
@@ -61,9 +71,11 @@
 
 <script>
   import Wallet from './Wallet.vue'
+  import WallGroup from './WallGroup.vue'
   import Coin from './Coin.vue'
   import Rig from './Rig.vue'
   import WalletModal from './WalletModal.vue'
+  import WallGroupModal from './WallGroupModal.vue'
   import CoinModal from './CoinModal.vue'
   import RigModal from './RigModal.vue'
   import { VueTabs, VTab } from 'vue-nav-tabs'
@@ -75,9 +87,11 @@
     },
     components: {
       appWallet: Wallet,
+      appWallGroup: WallGroup,
       appCoin: Coin,
       appRig: Rig,
       walletModal: WalletModal,
+      wallGroupModal: WallGroupModal,
       coinModal: CoinModal,
       rigModal: RigModal,
       VueTabs,
@@ -109,6 +123,9 @@
       },
       modalRigShow () {
         this.$modal.show('rig-modal', { rig: 'New' })
+      },
+      modalWallGroupShow () {
+        this.$modal.show('wall-group-modal', { wallGroup: 'New' })
       },
       getLength (obj) {
         return this[obj].length

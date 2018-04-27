@@ -23,8 +23,8 @@ export const store = new Vuex.Store({
             { id: '491ff6aa-ab61-45a3-9683-a4da71ab374c', coin: 'Ethereum', token: 'ETH', api: '', upTime: '1000' }
         ],
         wallGroups: [
-            { id: '476ffca6-9ca2-4127-a886-660f33736350', name: '' },
-            { id: '47f6aa26-63ab-4010-bafa-26026be9dfdf', name: '' }
+            { id: '476ffca6-9ca2-4127-a886-660f33736350', name: 'first' },
+            { id: '47f6aa26-63ab-4010-bafa-26026be9dfdf', name: 'second' }
         ],
         exchanges: [
             { id: '31c28766-0923-45ed-9eed-6f4d0f4ca287' },
@@ -81,6 +81,21 @@ export const store = new Vuex.Store({
         deleteRig(state, rig) {
             var index = state.rigs.findIndex(x => x.id == rig.id)
             state.rigs.splice(index, 1);
+        },
+        setWallGroup(state, wallGroup) {
+            if (wallGroup.id !== '') {
+                // Exist wallGroup
+                var index = state.wallGroups.findIndex(x => x.id == wallGroup.id)
+            } else {
+                // New wallGroup
+                wallGroup.id = uuidv4() // TODO: check id in DB
+                index = state.wallGroups.length
+            }
+            Vue.set(state.wallGroups, index, wallGroup)
+        },
+        deleteWallGroup(state, wallGroup) {
+            var index = state.wallGroups.findIndex(x => x.id == wallGroup.id)
+            state.wallGroups.splice(index, 1);
         }
     }
 });
