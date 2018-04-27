@@ -23,10 +23,16 @@
             <div class="row">
               <input 
                 type="text" 
-                class="form-control form-control-sm col-md-12" 
+                class="form-control form-control-sm col-md-10" 
                 id="coin-api" 
                 placeholder="Url to blockchain api"
                 v-model="coin.api">
+              <input 
+                type="text" 
+                class="form-control form-control-sm col-md-2" 
+                id="coin-api" 
+                placeholder="Update time"
+                v-model="coin.upTime">
             </div>
           </div>
         </div>

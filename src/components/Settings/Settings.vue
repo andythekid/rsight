@@ -7,9 +7,9 @@
        direction="vertical"
     >
       <v-tab title="Wallets">
-        <div class="container">
+        <div class="container bottom-search">
           <div class="row">
-            <input class="form-control col-md-4" placeholder="Search..">
+            <input class="form-control col-md-4 form-control-sm" placeholder="Search..">
             <button 
             type="button" 
             class="btn btn-primary btn-sm mb-2 col-md-2 offset-md-6" 
@@ -21,9 +21,9 @@
         <wallet-modal />
       </v-tab>
       <v-tab title="Coins">
-        <div class="container">
+        <div class="container bottom-search">
           <div class="row">
-            <input class="form-control col-md-4" placeholder="Search..">
+            <input class="form-control col-md-4 form-control-sm" placeholder="Search..">
             <button 
             type="button" 
             class="btn btn-primary btn-sm mb-2 col-md-2 offset-md-6" 
@@ -104,5 +104,7 @@
   .submenu {
     padding: 10px;
   }
-
+  .bottom-search {
+    margin: 0;
+  }
 </style>
