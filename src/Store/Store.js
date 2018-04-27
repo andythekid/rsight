@@ -22,9 +22,19 @@ export const store = new Vuex.Store({
             { id: '402d5087-5248-4398-a934-5e8970d4ef64', coin: 'Bitcoin', token: 'BTC', api: '', upTime: '1000' },
             { id: '491ff6aa-ab61-45a3-9683-a4da71ab374c', coin: 'Ethereum', token: 'ETH', api: '', upTime: '1000' }
         ],
-        wallGroups: [],
-        exchanges: [],
-        rigs: []
+        wallGroups: [
+            { id: '476ffca6-9ca2-4127-a886-660f33736350', name: '' },
+            { id: '47f6aa26-63ab-4010-bafa-26026be9dfdf', name: '' }
+        ],
+        exchanges: [
+            { id: '31c28766-0923-45ed-9eed-6f4d0f4ca287' },
+            { id: '523948ad-5be9-403a-9db1-c728ea9024e8' }
+        ],
+        rigs: [
+            { id: '5cc8d44d-c7f6-402e-b73c-c4288600e205', pool: 'https://ethermine.org/miners/', alias: 'first', wallet: '0xa5d097a49f7b529abfebe74a3b44fa69f133ed41', upTime: '5' },
+            { id: '3c3e5752-b054-4afb-b817-d8ed05118865', pool: 'https://ethermine.org/miners/', alias: 'second', wallet: '0xa5d097a49f7b529abfebe74a3b44fa69f133ed41', upTime: '5' },
+            { id: '2b1a9ad3-67ed-4726-9877-8ff117fc17a0', pool: 'https://ethermine.org/miners/', alias: '42', wallet: '0xa5d097a49f7b529abfebe74a3b44fa69f133ed41', upTime: '5' }
+        ]
     },
     mutations: {
         setWallet(state, wallet) {
@@ -56,6 +66,21 @@ export const store = new Vuex.Store({
         deleteCoin(state, coin) {
             var index = state.coins.findIndex(x => x.id == coin.id)
             state.coins.splice(index, 1);
+        },
+        setRig(state, rig) {
+            if (rig.id !== '') {
+                // Exist rig
+                var index = state.rigs.findIndex(x => x.id == rig.id)
+            } else {
+                // New rig
+                rig.id = uuidv4() // TODO: check id in DB
+                index = state.rigs.length
+            }
+            Vue.set(state.rigs, index, rig)
+        },
+        deleteRig(state, rig) {
+            var index = state.rigs.findIndex(x => x.id == rig.id)
+            state.rigs.splice(index, 1);
         }
     }
 });

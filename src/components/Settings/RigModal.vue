@@ -1,5 +1,5 @@
 <template>
-  <modal name="coin-modal"
+  <modal name="rig-modal"
     @before-open="beforeOpen"
     :adaptive="true">
     <form class="form-horizontal" action="">
@@ -9,30 +9,30 @@
             <div class="row">
               <input 
                 type="text" 
-                class="form-control form-control-sm col-md-9" 
-                id="coin-alias" 
-                placeholder="Coin (token) name"
-                v-model="coin.coin">
+                class="form-control form-control-sm col-md-4" 
+                id="rig-alias" 
+                placeholder="Rig alias"
+                v-model="rig.alias">
               <input 
                 type="text" 
-                class="form-control form-control-sm col-md-3" 
-                id="coin-alias" 
-                placeholder="Token"
-                v-model="coin.token">
+                class="form-control form-control-sm col-md-8" 
+                id="rig-wallet" 
+                placeholder="Wallet"
+                v-model="rig.wallet">
             </div>
             <div class="row">
               <input 
                 type="text" 
                 class="form-control form-control-sm col-md-10" 
-                id="coin-api" 
-                placeholder="Url to blockchain api"
-                v-model="coin.api">
+                id="rig-pool" 
+                placeholder="Url to pool api"
+                v-model="rig.pool">
               <input 
                 type="text" 
                 class="form-control form-control-sm col-md-2" 
-                id="coin-uptime" 
+                id="rig-uptime" 
                 placeholder="Update time"
-                v-model="coin.upTime">
+                v-model="rig.upTime">
             </div>
           </div>
         </div>
@@ -57,29 +57,29 @@
 export default {
   data () {
     return {
-      coin: '',
+      rig: '',
     }
   },
   methods: {
     beforeOpen (event) {
-      if (event.params.coin === 'New') {
-        this.coin = {
+      if (event.params.rig === 'New') {
+        this.rig = {
           id: '',
-          coin: '',
-          token: '',
-          api: '',
+          pool: '',
+          alias: '',
+          wallet: '',
           upTime: ''
         }
       } else {
-        this.coin = Object.assign({}, event.params.coin)
+        this.rig = Object.assign({}, event.params.rig)
       }
     },
     save () {
-      this.$store.commit('setCoin', this.coin)
-      this.$modal.hide('coin-modal')
+      this.$store.commit('setRig', this.rig)
+      this.$modal.hide('rig-modal')
     },
     cancel () {
-      this.$modal.hide('coin-modal')
+      this.$modal.hide('rig-modal')
     }
   }
 }

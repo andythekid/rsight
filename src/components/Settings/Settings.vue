@@ -42,7 +42,18 @@
         Wallet groups
       </v-tab>
       <v-tab title="Rigs">
-        Rigs
+        <div class="container bottom-search">
+          <div class="row">
+            <input class="form-control col-md-4 form-control-sm" placeholder="Search..">
+            <button 
+            type="button" 
+            class="btn btn-primary btn-sm mb-2 col-md-2 offset-md-6" 
+            @click="modalRigShow"
+            >Add new</button>
+          </div>
+        </div>
+        <app-rig v-for="rig in rigs" :key="rig.id" :rig="rig"></app-rig>
+        <rig-modal />
       </v-tab>
     </vue-tabs>
   </div>
@@ -51,8 +62,10 @@
 <script>
   import Wallet from './Wallet.vue'
   import Coin from './Coin.vue'
+  import Rig from './Rig.vue'
   import WalletModal from './WalletModal.vue'
   import CoinModal from './CoinModal.vue'
+  import RigModal from './RigModal.vue'
   import { VueTabs, VTab } from 'vue-nav-tabs'
   import 'vue-nav-tabs/themes/paper.css'
   export default {
@@ -63,8 +76,10 @@
     components: {
       appWallet: Wallet,
       appCoin: Coin,
+      appRig: Rig,
       walletModal: WalletModal,
       coinModal: CoinModal,
+      rigModal: RigModal,
       VueTabs,
       VTab
     },
@@ -91,6 +106,9 @@
       },
       modalCoinShow () {
         this.$modal.show('coin-modal', { coin: 'New' })
+      },
+      modalRigShow () {
+        this.$modal.show('rig-modal', { rig: 'New' })
       },
       getLength (obj) {
         return this[obj].length
