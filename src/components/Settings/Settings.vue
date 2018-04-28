@@ -6,6 +6,9 @@
        :start-index="1"
        direction="vertical"
     >
+      <v-tab title="General">
+
+      </v-tab>
       <v-tab title="Wallets">
         <div class="container bottom-search">
           <div class="row">
@@ -49,7 +52,18 @@
         <coin-modal />
       </v-tab>
       <v-tab title="Exchanges">
-        Exchanges
+        <div class="container bottom-search">
+          <div class="row">
+            <input class="form-control col-md-4 form-control-sm" placeholder="Search..">
+            <button 
+            type="button" 
+            class="btn btn-primary btn-sm mb-2 col-md-2 offset-md-6" 
+            @click="modalExchangeShow"
+            >Add new</button>
+          </div>
+        </div>
+        <app-exchange v-for="exchange in exchanges" :key="exchange.id" :exchange="exchange"></app-exchange>
+        <exchange-modal />
       </v-tab>
       <v-tab title="Rigs">
         <div class="container bottom-search">
@@ -74,10 +88,12 @@
   import WallGroup from './WallGroup.vue'
   import Coin from './Coin.vue'
   import Rig from './Rig.vue'
+  import Exchange from './Exchange.vue'
   import WalletModal from './WalletModal.vue'
   import WallGroupModal from './WallGroupModal.vue'
   import CoinModal from './CoinModal.vue'
   import RigModal from './RigModal.vue'
+  import ExchangeModal from './ExchangeModal.vue'
   import { VueTabs, VTab } from 'vue-nav-tabs'
   import 'vue-nav-tabs/themes/paper.css'
   export default {
@@ -90,10 +106,12 @@
       appWallGroup: WallGroup,
       appCoin: Coin,
       appRig: Rig,
+      appExchange: Exchange,
       walletModal: WalletModal,
       wallGroupModal: WallGroupModal,
       coinModal: CoinModal,
       rigModal: RigModal,
+      exchangeModal: ExchangeModal,
       VueTabs,
       VTab
     },
@@ -126,6 +144,9 @@
       },
       modalWallGroupShow () {
         this.$modal.show('wall-group-modal', { wallGroup: 'New' })
+      },
+      modalExchangeShow () {
+        this.$modal.show('exchange-modal', { exchange: 'New' })
       },
       getLength (obj) {
         return this[obj].length

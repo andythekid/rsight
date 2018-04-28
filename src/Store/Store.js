@@ -27,8 +27,8 @@ export const store = new Vuex.Store({
             { id: '47f6aa26-63ab-4010-bafa-26026be9dfdf', name: 'second' }
         ],
         exchanges: [
-            { id: '31c28766-0923-45ed-9eed-6f4d0f4ca287' },
-            { id: '523948ad-5be9-403a-9db1-c728ea9024e8' }
+            { id: '31c28766-0923-45ed-9eed-6f4d0f4ca287', name: 'Binance BTC', coin: 'Bitcoin', api: '', upTime: '10' },
+            { id: '523948ad-5be9-403a-9db1-c728ea9024e8', name: 'EtherDelta ETH', coin: 'Ethereum', api: '', upTime: '10' }
         ],
         rigs: [
             { id: '5cc8d44d-c7f6-402e-b73c-c4288600e205', pool: 'https://ethermine.org/miners/', alias: 'first', wallet: '0xa5d097a49f7b529abfebe74a3b44fa69f133ed41', upTime: '5' },
@@ -96,6 +96,21 @@ export const store = new Vuex.Store({
         deleteWallGroup(state, wallGroup) {
             var index = state.wallGroups.findIndex(x => x.id == wallGroup.id)
             state.wallGroups.splice(index, 1);
+        },
+        setExchange(state, exchange) {
+            if (exchange.id !== '') {
+                // Exist exchange
+                var index = state.exchanges.findIndex(x => x.id == exchange.id)
+            } else {
+                // New exchange
+                exchange.id = uuidv4() // TODO: check id in DB
+                index = state.exchanges.length
+            }
+            Vue.set(state.exchanges, index, exchange)
+        },
+        deleteExchange(state, exchange) {
+            var index = state.exchanges.findIndex(x => x.id == exchange.id)
+            state.exchanges.splice(index, 1);
         }
     }
 });
