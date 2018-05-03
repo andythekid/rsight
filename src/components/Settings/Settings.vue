@@ -12,7 +12,7 @@
       <v-tab title="Wallets">
         <div class="container bottom-search">
           <div class="row">
-            <input class="form-control col-md-4 form-control-sm" placeholder="Search..">
+            <input class="form-control col-md-4 form-control-sm" placeholder="Search.." v-model="searchQuery" autofocus>
             <button 
             type="button" 
             class="btn btn-primary btn-sm mb-2 col-md-2 offset-md-6" 
@@ -20,13 +20,13 @@
             >Add new</button>
           </div>
         </div>
-        <app-wallet v-for="wallet in wallets" :key="wallet.id" :wallet="wallet"></app-wallet>
+        <app-wallet v-for="wallet in filteredWallets" :key="wallet.id" :wallet="wallet"></app-wallet>
         <wallet-modal />
       </v-tab>
       <v-tab title="Wallet groups">
         <div class="container bottom-search">
           <div class="row">
-            <input class="form-control col-md-4 form-control-sm" placeholder="Search..">
+            <input class="form-control col-md-4 form-control-sm" placeholder="Search.." v-model="searchQuery" autofocus>
             <button 
             type="button" 
             class="btn btn-primary btn-sm mb-2 col-md-2 offset-md-6" 
@@ -34,13 +34,13 @@
             >Add new</button>
           </div>
         </div>
-        <app-wall-group v-for="wallGroup in wallGroups" :key="wallGroup.id" :wallGroup="wallGroup"></app-wall-group>
+        <app-wall-group v-for="wallGroup in filteredWallGroups" :key="wallGroup.id" :wallGroup="wallGroup"></app-wall-group>
         <wall-group-modal />
       </v-tab>
       <v-tab title="Coins">
         <div class="container bottom-search">
           <div class="row">
-            <input class="form-control col-md-4 form-control-sm" placeholder="Search..">
+            <input class="form-control col-md-4 form-control-sm" placeholder="Search.." v-model="searchQuery" autofocus>
             <button 
             type="button" 
             class="btn btn-primary btn-sm mb-2 col-md-2 offset-md-6" 
@@ -48,13 +48,13 @@
             >Add new</button>
           </div>
         </div>
-        <app-coin v-for="coin in coins" :key="coin.id" :coin="coin"></app-coin>
+        <app-coin v-for="coin in filteredCoins" :key="coin.id" :coin="coin"></app-coin>
         <coin-modal />
       </v-tab>
       <v-tab title="Exchanges">
         <div class="container bottom-search">
           <div class="row">
-            <input class="form-control col-md-4 form-control-sm" placeholder="Search..">
+            <input class="form-control col-md-4 form-control-sm" placeholder="Search.." v-model="searchQuery" autofocus>
             <button 
             type="button" 
             class="btn btn-primary btn-sm mb-2 col-md-2 offset-md-6" 
@@ -62,13 +62,13 @@
             >Add new</button>
           </div>
         </div>
-        <app-exchange v-for="exchange in exchanges" :key="exchange.id" :exchange="exchange"></app-exchange>
+        <app-exchange v-for="exchange in filteredExchanges" :key="exchange.id" :exchange="exchange"></app-exchange>
         <exchange-modal />
       </v-tab>
       <v-tab title="Rigs">
         <div class="container bottom-search">
           <div class="row">
-            <input class="form-control col-md-4 form-control-sm" placeholder="Search..">
+            <input class="form-control col-md-4 form-control-sm" placeholder="Search.." v-model="searchQuery" autofocus>
             <button 
             type="button" 
             class="btn btn-primary btn-sm mb-2 col-md-2 offset-md-6" 
@@ -76,7 +76,7 @@
             >Add new</button>
           </div>
         </div>
-        <app-rig v-for="rig in rigs" :key="rig.id" :rig="rig"></app-rig>
+        <app-rig v-for="rig in filteredRigs" :key="rig.id" :rig="rig"></app-rig>
         <rig-modal />
       </v-tab>
     </vue-tabs>
@@ -99,6 +99,7 @@
   export default {
     data() {
       return {
+        searchQuery: '',
       }
     },
     components: {
@@ -130,6 +131,49 @@
       },
       exchanges() {
         return this.$store.state.exchanges
+      },
+      filteredWallets: function () {
+          let self = this
+          let searchRegex = new RegExp(self.searchQuery, 'i')
+          return self.wallets.filter(function (wallet) {
+            return searchRegex.test(wallet.alias) ||
+                   searchRegex.test(wallet.coin) ||
+                   searchRegex.test(wallet.address)
+        })
+      },
+      filteredCoins: function () {
+          let self = this
+          let searchRegex = new RegExp(self.searchQuery, 'i')
+          return self.coins.filter(function (coin) {
+            return searchRegex.test(coin.token) ||
+                   searchRegex.test(coin.coin) ||
+                   searchRegex.test(coin.api)
+        })
+      },
+      filteredWallGroups: function () {
+          let self = this
+          let searchRegex = new RegExp(self.searchQuery, 'i')
+          return self.wallGroups.filter(function (wallGroup) {
+            return searchRegex.test(wallGroup.name)
+        })
+      },
+      filteredRigs: function () {
+          let self = this
+          let searchRegex = new RegExp(self.searchQuery, 'i')
+          return self.rigs.filter(function (rig) {
+            return searchRegex.test(rig.alias) ||
+                   searchRegex.test(rig.pool) ||
+                   searchRegex.test(rig.wallet)
+        })
+      },
+      filteredExchanges: function () {
+          let self = this
+          let searchRegex = new RegExp(self.searchQuery, 'i')
+          return self.exchanges.filter(function (exchange) {
+            return searchRegex.test(exchange.name) ||
+                   searchRegex.test(exchange.coin) ||
+                   searchRegex.test(exchange.api)
+        })
       }
     },
     methods: {
